@@ -1,0 +1,36 @@
+import os
+from threading import Thread
+import pygame
+from pygame.locals import *
+pygame.init()
+os.system('clear')
+
+X = 1000
+Y = 564
+width,height = 1000,564
+window = pygame.display.set_mode((width,height))            #screen/display size
+pygame.display.set_caption('tamathgotchi game')           #setting name of pygame window
+
+bg_img = pygame.image.load('yr10/Images/background.jpg')    #image ref 
+bg_img = pygame.transform.scale(bg_img,(width,height))      #sizing image
+
+white = (255,255,255)
+black = (50,50,50)
+font = pygame.font.Font('yr10/Style/KaushanScript-Regular.otf',64)  #font, size
+text = font.render('Tamathgotchi Game', True, black)  #text, smth, text colour, box colour
+textRect = text.get_rect()
+textRect.center = (X//2,Y//4)
+
+running = True                          
+while running:
+    window.fill(white)
+    window.blit(bg_img,(0,0))           #background image
+    window.blit(text, textRect)         #Text/title
+    for event in pygame.event.get():    
+        if event.type == QUIT:          
+            running = False             
+    pygame.display.update()
+             
+pygame.quit()
+
+
