@@ -1,0 +1,75 @@
+import os
+os.system ('clear')
+import random
+import time
+
+life = 3    #how many lifes left
+animal = 0  #evolution stage
+
+def is_integer(userAnswer): # copied code from bard
+  """Returns True if input_str is an integer, False otherwise."""
+  for char in userAnswer:
+    if not char.isdigit():
+      return False
+  return True
+
+def start():
+    os.system ('clear')
+    print ("(Game Name)")
+    input ("Press enter ")
+
+def method():
+    life = 3    #how many lifes left
+    animal = 0  #evolution stage
+    death = 0   #dying stage
+    while True:
+        while life > 0:
+            os.system ('clear')
+            print ("Life = " + str(life),"\n")
+            print ("Animal = " + str(animal),"\n")
+            firstNumber = random.randint(1,12)
+            secondNumber = random.randint(1,12)
+            answer = firstNumber * secondNumber
+
+            print (str(firstNumber) + " x " + str(secondNumber))
+            userAnswer = input ("Your answer: ")
+            if not is_integer(userAnswer):
+                print("Invalid input. Please enter a number.")
+                time.sleep(1)
+            else:
+                print ("Answer: " + str(answer))
+                if int(userAnswer) == answer:
+                    print ("Correct!")
+                    animal = animal + 1
+                    time.sleep(0.5)   # Wait 0.5 sec
+                else:
+                    life = life - 1
+                    death = death + 1
+                    print ("Try again")
+                    time.sleep(1.5)   # Wait 1.5 sec
+                print ("\n")
+        break
+
+def main():
+    start()
+    method()
+    os.system ('clear')
+    print ("Murderer.")
+    time.sleep(2)   # wait 2 seconds
+
+def main2():
+    method()
+    os.system ('clear')
+    print ("Murderer.")
+    time.sleep(2)   # wait 2 seconds
+
+def end():
+    ending = input("Press o to restart or x to exit ")
+    if ending == "o":
+        main2() # go straight to questions
+    if ending != "o":
+        main() # return to beginning/home screen
+
+while True:
+    main()
+    end()
