@@ -8,6 +8,7 @@ pygame.display.set_caption("Ta-math-gotchi game!!")         #Naming our game
 
 TAMAGOTCHI_RIGHTANSWER = pygame.image.load('Images/Tamagotchihappy.png')
 TAMAGOTCHI = pygame.image.load('Images/Tamagotchi.png')
+TAMAGOTCHI = pygame.transform.scale(TAMAGOTCHI,(70,100))    #change size
 TAMAGOTCHI_WRONGANSWER = pygame.image.load(os.path.join('Images', 'Tamagotchihurt.png'))
 TAMAGOTCHI_DEAD = pygame.image.load(os.path.join('Images', 'Tamagotchided.png'))
 
