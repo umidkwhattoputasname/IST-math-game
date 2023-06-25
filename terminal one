@@ -15,7 +15,7 @@ def is_integer(userAnswer): # copied code from bard
 
 def start():
     os.system ('clear')
-    print ("(Game Name)")
+    print ("Tomodachi Math Game")
     input ("Press enter ")
 
 def method():
