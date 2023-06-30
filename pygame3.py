@@ -66,20 +66,12 @@ heart2 = pygame.transform.scale(heart2,(width_life,height_life))
 heart3 = pygame.image.load('Images/Heart.png')         
 heart3 = pygame.transform.scale(heart3,(width_life,height_life))
 
-page_no = 0
-question = 1
-
-life = 3
-score = 0
-running = True
-
-
-def end():
+def end(): #end program if window closed
     global running
     if event.type == QUIT:
         running = False
 
-def infopages():
+def infopages(): #formatting for first few pages and instructions
     infofont = pygame.font.Font('Style/minecraft_font.ttf',32)
     instructions = "You have 3 lives"
     info = infofont.render(instructions, True, test)
@@ -138,62 +130,64 @@ def infopages():
     if page_no == 13:
         complete()
 
-def fail():
+def fail(): #screen when you fail
     font = pygame.font.Font('Style/minecraft_font.ttf',40)  #font, size
     text = font.render('Your pet died!', True, test)  #text, smth, text colour, box colour
     textRect = text.get_rect()
-    textRect.center = (X//2,Y//4)
+    textRect.center = (X//2,Y//3)
 
-    pygame.draw.rect(window, test, pygame.Rect(150,220,200,50), 4,3) #screen, colour, position[x,y,width,height], fill/border, corners
+    pygame.draw.rect(window, test, pygame.Rect(170,250,200,50), 4,3) #screen, colour, position[x,y,width,height], fill/border, corners
     answer1 = answer_font.render ('Try Again', True, test)
-    window.blit(answer1,(195,230))
-    pygame.draw.rect(window, test, pygame.Rect(375,220,200,50), 4,3) #screen, colour, position[x,y,width,height], fill/border, corners
+    window.blit(answer1,(215,260))
+    pygame.draw.rect(window, test, pygame.Rect(395,250,200,50), 4,3) #screen, colour, position[x,y,width,height], fill/border, corners
     answer2 = answer_font.render ('Main Menu', True, test)
-    window.blit(answer2,(420,230))
-    pygame.draw.rect(window, test, pygame.Rect(600,220,200,50), 4,3) #screen, colour, position[x,y,width,height], fill/border, corners
+    window.blit(answer2,(440,260))
+    pygame.draw.rect(window, test, pygame.Rect(620,250,200,50), 4,3) #screen, colour, position[x,y,width,height], fill/border, corners
     answer3 = answer_font.render ('Quit', True, test)
-    window.blit(answer3,(680,230))
+    window.blit(answer3,(700,260))
 
     window.blit(text,textRect)
     sprite()
-    if life == 0:
-        if event.type == MOUSEBUTTONDOWN:
+    if life == 0: 
+        if event.type == MOUSEBUTTONDOWN:   #each button returns/does different things
             mouse = pygame.mouse.get_pos()
-            if 150 <= mouse[0] <= 350 and 200 <= mouse[1] <= 250:
+            if 170 <= mouse[0] <= 370 and 250 <= mouse[1] <= 300:
                 return True
-            if 375 <= mouse[0] <= 575 and 200 <= mouse[1] <= 250:
+            if 395 <= mouse[0] <= 595 and 250 <= mouse[1] <= 300:
                 return False
-            if 600 <= mouse[0] <= 800 and 200 <= mouse[1] <= 250:
+            if 620 <= mouse[0] <= 820 and 250 <= mouse[1] <= 300:
                 pygame.quit()
 
-def complete():
+def complete(): #screen when you complete it, similar formatting as fail screen
     font = pygame.font.Font('Style/minecraft_font.ttf',40)  #font, size
     text = font.render('Congratulations!', True, test)  #text, smth, text colour, box colour
     textRect = text.get_rect()
     textRect.center = (X//2,Y//4)
 
-    pygame.draw.rect(window, test, pygame.Rect(150,200,200,50), 4,3) #screen, colour, position[x,y,width,height], fill/border, corners
+    pygame.draw.rect(window, test, pygame.Rect(170,250,200,50), 4,3) #screen, colour, position[x,y,width,height], fill/border, corners
     answer1 = answer_font.render ('Play Again', True, test)
-    window.blit(answer1,(190,210))
-    pygame.draw.rect(window, test, pygame.Rect(375,200,200,50), 4,3) #screen, colour, position[x,y,width,height], fill/border, corners
+    window.blit(answer1,(210,260))
+    pygame.draw.rect(window, test, pygame.Rect(395,250,200,50), 4,3) #screen, colour, position[x,y,width,height], fill/border, corners
     answer2 = answer_font.render ('Main Menu', True, test)
-    window.blit(answer2,(420,210))
-    pygame.draw.rect(window, test, pygame.Rect(600,200,200,50), 4,3) #screen, colour, position[x,y,width,height], fill/border, corners
+    window.blit(answer2,(440,260))
+    pygame.draw.rect(window, test, pygame.Rect(620,250,200,50), 4,3) #screen, colour, position[x,y,width,height], fill/border, corners
     answer3 = answer_font.render ('Quit', True, test)
-    window.blit(answer3,(680,210))
+    window.blit(answer3,(700,260))
 
     window.blit(text,textRect)
     sprite()
     if page_no == 13:
         if event.type == MOUSEBUTTONDOWN:
             mouse = pygame.mouse.get_pos()
-            if 150 <= mouse[0] <= 350 and 200 <= mouse[1] <= 250:
+            if 170 <= mouse[0] <= 370 and 250 <= mouse[1] <= 300:
                 return True
-            if 375 <= mouse[0] <= 575 and 200 <= mouse[1] <= 250:
+            if 395 <= mouse[0] <= 595 and 250 <= mouse[1] <= 300:
                 return False
-            if 600 <= mouse[0] <= 800 and 200 <= mouse[1] <= 250:
+            if 620 <= mouse[0] <= 820 and 250 <= mouse[1] <= 300:
                 pygame.quit()
 
+#formating for each question
+#each question has same formatting just different questions and answers
 def level1_question1():     
     quizzes = "Which of the following decimals have"     #first line
     quiz = quiz_font.render(quizzes, True, test)  
@@ -521,7 +515,7 @@ def level1_question8_answer():          #answer positions
         else:
             return None
 
-def level1_questions_method():         #generate random questions, no repeating questions
+def level1_questions_method():          #if answer is correct then return true else false
     if question == 1:
         level1_question1()
         if level1_question1_answer() == True:
@@ -571,7 +565,7 @@ def level1_questions_method():         #generate random questions, no repeating 
         elif level1_question8_answer() == False:
             return False
 
-def level1():
+def level1():   #display level screen and run the method for the questions
     level_font = pygame.font.Font('Style/minecraft_font.ttf',48)
     level_text = "Level 1"
     level = level_font.render(level_text, True, test)
@@ -950,7 +944,7 @@ def level2_question8_answer():          #answer positions
         else:
             return None
 
-def level2_questions_method():         #generate random questions, no repeating questions
+def level2_questions_method():          #same as other ones
     if question == 1:
         level2_question1()
         if level2_question1_answer() == True:
@@ -1000,7 +994,7 @@ def level2_questions_method():         #generate random questions, no repeating 
         elif level2_question8_answer() == False:
             return False
 
-def level2():
+def level2(): #same as other ones
     level_font = pygame.font.Font('Style/minecraft_font.ttf',48)
     level_text = "Level 2"
     level = level_font.render(level_text, True, test)
@@ -1384,7 +1378,7 @@ def level3_question8_answer():          #answer positions
         else:
             return None
 
-def level3_questions_method():         #generate random questions, no repeating questions
+def level3_questions_method():          #same as other ones
     if question == 1:
         level3_question1()
         if level3_question1_answer() == True:
@@ -1434,7 +1428,7 @@ def level3_questions_method():         #generate random questions, no repeating 
         elif level3_question8_answer() == False:
             return False
 
-def level3():
+def level3(): #same as other ones
     level_font = pygame.font.Font('Style/minecraft_font.ttf',48)
     level_text = "Level 3"
     level = level_font.render(level_text, True, test)
@@ -1445,39 +1439,55 @@ def level3():
     if page_no == 12:
         level3_questions_method()
 
-def sprite():
+def sprite(): #posiitioning for hearts, sprite and score
     font = pygame.font.Font('Style/minecraft_font.ttf',24)  #font, size
-    if page_no != 13:
+    if page_no != 13 and page_no != 99: #don't display score on death and completion screens
         text = f"{score +1}/5"
         text = font.render(text, True, test)  #text, smth, text colour, box colour
         textRect = text.get_rect()
         textRect.center = (810,40)
         window.blit (text,textRect)
-    if life == 3:
+    if sprite_no == 1:  #sprite for first question
+        window.blit(normal,postion_sprite)
+    if sprite_no == 2:  #if correct then sprite is happy
         window.blit(happy,postion_sprite)
+    if sprite_no == 3:  #if wrong sprite is dying
+        window.blit(dying,postion_sprite)    
+    if life == 3:   #displaying amount of hearts depending on life left
         if page_no != 13:
             window.blit(heart1,postion_heart1)
             window.blit(heart2,postion_heart2)
             window.blit(heart3,postion_heart3)
     if life == 2:
-        window.blit(normal,postion_sprite)
         if page_no != 13:
             window.blit(heart1,postion_heart1)
             window.blit(heart2,postion_heart2)
     if life == 1:
-        window.blit(dying,postion_sprite)
         if page_no != 13:
             window.blit(heart1,postion_heart1)
-    if life == 0:
+    if life == 0:   #if died then pet dies
         window.blit(dead,postion_sprite)
 
+def time_taken():
+    if page_no == 13 and page_no == 99:
+        end_time = time.time()
+        total_time = start_time - end_time
+        total_time_mins = total_time/60 
 
-numer_list = []         #generate random question after first one
-all_questions = 0
-a = 0
-change = 1
+page_no = 0     #page number
+question = 1    #starting question --> ends up being randomised for late questions
 
+life = 3        #amount of lives
+score = 0       #questions to complete --> 1/5 means first question to complete
+running = True  #loop variable
 
+numer_list = []     #randomised question list
+all_questions = 0   #amount of numbers is numer_list
+a = 0               #position in numer_list
+change = 1          #variable for running randomised list once
+
+sprite_no = 1       #costume for sprite, changes depending on right or wrong answer
+start_time = time.time()
 
 while running:
     mouse = pygame.mouse.get_pos()      #stores mouse position
@@ -1486,118 +1496,126 @@ while running:
     level1()
     level2()
     level3()  
-    if change == 1:
+    if change == 1:     #generates a random list once until player dies or plays again
         numer_list.clear()
         all_questions = 0
         while all_questions < 7:
             question_no = random.randint(2,8)
-            if question_no not in numer_list:
+            if question_no not in numer_list:   #makes it so the list does not contain repeating questions
                 numer_list.append(question_no)
                 all_questions = all_questions + 1
-        change = 0
-        print (all_questions)
-        print(numer_list)
+        change = 0 #stops generating list
     for event in pygame.event.get():  
         if page_no <= 5:                #stops page turning after instructions
             if event.type == MOUSEBUTTONUP: #if mouse clicked
                 page_no = page_no + 1
         
-        if page_no == 6:
-            if score < 5:
-                if level1_questions_method() == False:
+        if page_no == 6:    #level 1 question page
+            if score < 5:   #loop until player pass
+                if level1_questions_method() == False:  #answer is wrong
                     question = numer_list[a]    #question no. = random number in list
                     a = a + 1
                     life = life - 1
+                    sprite_no = 3
                     if life == 0:
                         page_no = 99
-                if level1_questions_method() == True:
+                if level1_questions_method() == True:   #answer is correct
                     question = numer_list[a]
                     a = a + 1
                     score = score + 1
-            else:
+                    sprite_no = 2
+            else:   #reset variables and change pages
                 score = 0
                 question = 1
                 page_no = 7
                 a = 0
-        if 7 <= page_no <= 8:
+                sprite_no = 1
+        if 7 <= page_no <= 8:   #continue to next page (level 2 and questions)
             if event.type == MOUSEBUTTONUP: #if mouse clicked
                 page_no = page_no + 1     
 
-        if page_no == 9:
+        if page_no == 9:    #level 2 questions same structure as level 1
             if score < 5:
                 if level2_questions_method() == False:
                     question = numer_list[a]
                     a = a + 1
                     life = life - 1
+                    sprite_no = 3
                     if life == 0:
                         page_no = 99
                 if level2_questions_method() == True:
                     question = numer_list[a]
                     a = a + 1
                     score = score + 1
+                    sprite_no = 2
             else:
                 score = 0
                 question = 1
                 page_no = page_no + 1
                 a = 0
+                sprite_no = 1
         if 10 <= page_no <= 11:
                 if event.type == MOUSEBUTTONUP: #if mouse clicked
                     page_no = page_no + 1    
 
-        if page_no == 12:
+        if page_no == 12:   #level 3
             if score < 5:
                 if level3_questions_method() == False:
                     question = numer_list[a]
                     a = a + 1
                     life = life - 1
+                    sprite_no = 3
                     if life == 0:
                         page_no = 99
                 if level3_questions_method() == True:
                     question = numer_list[a]
                     a = a + 1
                     score = score + 1
+                    sprite = 2
             else:
                 score = 0
                 question = 1
                 page_no = page_no + 1 
                 a = 0
         
-        if page_no == 13:        
-            if complete() == True:
+        if page_no == 13:   #completion page      
+            if complete() == True:  #reset variables and change page back to level 1
                 page_no = 4
                 question = 1
                 score = 0
                 life = 3
-                change = 1
-            elif complete() == False:
+                change = 1  #generates another question list
+                sprite_no = 1
+            elif complete() == False:   #same thing but page goes to title page
                 page_no = -1
                 question = 1
                 score = 0
                 life = 3
                 change = 1
+                sprite_no = 1
        
-        if life == 0:        
-            if fail() == True:
+        if life == 0:       #player failed
+            if fail() == True:  #reset all variables and go straight to lvl 1
                 page_no = 4
                 question = 1
                 score = 0
                 life = 3
                 change = 1
                 a = 0
-            elif fail() == False:
+                sprite_no = 1
+            elif fail() == False: #reset variable and go to home page
                 page_no = -1
                 question = 1
                 score = 0
                 life = 3
                 change = 1
                 a = 0
+                sprite_no = 1
 
         if event.type == MOUSEBUTTONUP: #if mouse clicked
             print(page_no, question, life, score,change)
 
         end()            
-    
-  
     
     pygame.display.update()
              
