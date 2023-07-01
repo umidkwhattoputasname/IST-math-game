@@ -1,8 +1,9 @@
 import os
+import sys
 import pygame
 from pygame.locals import *
 import random
-import time
+import pickle
 pygame.init()
 os.system('clear')
 
@@ -156,11 +157,13 @@ def fail(): #screen when you fail
             if 395 <= mouse[0] <= 595 and 250 <= mouse[1] <= 300:
                 return False
             if 620 <= mouse[0] <= 820 and 250 <= mouse[1] <= 300:
+                save_variable_values()  
                 pygame.quit()
+                sys.exit()
 
 def complete(): #screen when you complete it, similar formatting as fail screen
-    font = pygame.font.Font('Style/minecraft_font.ttf',40)  #font, size
-    text = font.render('Congratulations!', True, test)  #text, smth, text colour, box colour
+    congrats_font = pygame.font.Font('Style/minecraft_font.ttf',40)  #font, size
+    text = congrats_font.render('Congratulations!', True, test)  #text, smth, text colour, box colour
     textRect = text.get_rect()
     textRect.center = (X//2,Y//4)
 
@@ -184,7 +187,9 @@ def complete(): #screen when you complete it, similar formatting as fail screen
             if 395 <= mouse[0] <= 595 and 250 <= mouse[1] <= 300:
                 return False
             if 620 <= mouse[0] <= 820 and 250 <= mouse[1] <= 300:
+                save_variable_values()  
                 pygame.quit()
+                sys.exit()
 
 #formating for each question
 #each question has same formatting just different questions and answers
@@ -515,55 +520,56 @@ def level1_question8_answer():          #answer positions
         else:
             return None
 
-def level1_questions_method():          #if answer is correct then return true else false
-    if question == 1:
-        level1_question1()
-        if level1_question1_answer() == True:
-            return True
-        elif level1_question1_answer() == False:
-            return False
-    if question == 2:
-        level1_question2()
-        if level1_question2_answer() == True:
-            return True
-        elif level1_question2_answer() == False:
-            return False
-    if question == 3:
-        level1_question3()
-        if level1_question3_answer() == True:
-            return True
-        elif level1_question3_answer() == False:
-            return False
-    if question == 4:
-        level1_question4()
-        if level1_question4_answer() == True:
-            return True
-        elif level1_question4_answer() == False:
-            return False
-    if question == 5:
-        level1_question5()
-        if level1_question5_answer() == True:
-            return True
-        elif level1_question5_answer() == False:
-            return False    
-    if question == 6:
-        level1_question6()
-        if level1_question6_answer() == True:
-            return True
-        elif level1_question6_answer() == False:
-            return False
-    if question == 7:
-        level1_question7()
-        if level1_question7_answer() == True:
-            return True
-        elif level1_question7_answer() == False:
-            return False
-    if question == 8:
-        level1_question8()
-        if level1_question8_answer() == True:
-            return True
-        elif level1_question8_answer() == False:
-            return False
+def level1_questions_method(run = True):          #if answer is correct then return true else false
+    if run:   
+        if question == 1:
+            level1_question1()
+            if level1_question1_answer() == True:
+                return True
+            elif level1_question1_answer() == False:
+                return False
+        if question == 2:
+            level1_question2()
+            if level1_question2_answer() == True:
+                return True
+            elif level1_question2_answer() == False:
+                return False
+        if question == 3:
+            level1_question3()
+            if level1_question3_answer() == True:
+                return True
+            elif level1_question3_answer() == False:
+                return False
+        if question == 4:
+            level1_question4()
+            if level1_question4_answer() == True:
+                return True
+            elif level1_question4_answer() == False:
+                return False
+        if question == 5:
+            level1_question5()
+            if level1_question5_answer() == True:
+                return True
+            elif level1_question5_answer() == False:
+                return False    
+        if question == 6:
+            level1_question6()
+            if level1_question6_answer() == True:
+                return True
+            elif level1_question6_answer() == False:
+                return False
+        if question == 7:
+            level1_question7()
+            if level1_question7_answer() == True:
+                return True
+            elif level1_question7_answer() == False:
+                return False
+        if question == 8:
+            level1_question8()
+            if level1_question8_answer() == True:
+                return True
+            elif level1_question8_answer() == False:
+                return False
 
 def level1():   #display level screen and run the method for the questions
     level_font = pygame.font.Font('Style/minecraft_font.ttf',48)
@@ -574,7 +580,7 @@ def level1():   #display level screen and run the method for the questions
     if page_no == 5:
         window.blit(level,levelRect)
     if page_no == 6:
-        level1_questions_method()
+        level1_questions_method(run = True)
 
 
 def level2_question1():     
@@ -944,55 +950,56 @@ def level2_question8_answer():          #answer positions
         else:
             return None
 
-def level2_questions_method():          #same as other ones
-    if question == 1:
-        level2_question1()
-        if level2_question1_answer() == True:
-            return True
-        elif level2_question1_answer() == False:
-            return False
-    if question == 2:
-        level2_question2()
-        if level2_question2_answer() == True:
-            return True
-        elif level2_question2_answer() == False:
-            return False
-    if question == 3:
-        level2_question3()
-        if level2_question3_answer() == True:
-            return True
-        elif level2_question3_answer() == False:
-            return False
-    if question == 4:
-        level2_question4()
-        if level2_question4_answer() == True:
-            return True
-        elif level2_question4_answer() == False:
-            return False
-    if question == 5:
-        level2_question5()
-        if level2_question5_answer() == True:
-            return True
-        elif level2_question5_answer() == False:
-            return False    
-    if question == 6:
-        level2_question6()
-        if level2_question6_answer() == True:
-            return True
-        elif level2_question6_answer() == False:
-            return False
-    if question == 7:
-        level2_question7()
-        if level2_question7_answer() == True:
-            return True
-        elif level2_question7_answer() == False:
-            return False
-    if question == 8:
-        level2_question8()
-        if level2_question8_answer() == True:
-            return True
-        elif level2_question8_answer() == False:
-            return False
+def level2_questions_method(run = True):          #same as other ones
+    if run:
+        if question == 1:
+            level2_question1()
+            if level2_question1_answer() == True:
+                return True
+            elif level2_question1_answer() == False:
+                return False
+        if question == 2:
+            level2_question2()
+            if level2_question2_answer() == True:
+                return True
+            elif level2_question2_answer() == False:
+                return False
+        if question == 3:
+            level2_question3()
+            if level2_question3_answer() == True:
+                return True
+            elif level2_question3_answer() == False:
+                return False
+        if question == 4:
+            level2_question4()
+            if level2_question4_answer() == True:
+                return True
+            elif level2_question4_answer() == False:
+                return False
+        if question == 5:
+            level2_question5()
+            if level2_question5_answer() == True:
+                return True
+            elif level2_question5_answer() == False:
+                return False    
+        if question == 6:
+            level2_question6()
+            if level2_question6_answer() == True:
+                return True
+            elif level2_question6_answer() == False:
+                return False
+        if question == 7:
+            level2_question7()
+            if level2_question7_answer() == True:
+                return True
+            elif level2_question7_answer() == False:
+                return False
+        if question == 8:
+            level2_question8()
+            if level2_question8_answer() == True:
+                return True
+            elif level2_question8_answer() == False:
+                return False
 
 def level2(): #same as other ones
     level_font = pygame.font.Font('Style/minecraft_font.ttf',48)
@@ -1003,7 +1010,7 @@ def level2(): #same as other ones
     if page_no == 8:
         window.blit(level,levelRect)
     if page_no == 9:
-        level2_questions_method()
+        level2_questions_method(run = True)
 
 
 def level3_question1():     
@@ -1378,55 +1385,56 @@ def level3_question8_answer():          #answer positions
         else:
             return None
 
-def level3_questions_method():          #same as other ones
-    if question == 1:
-        level3_question1()
-        if level3_question1_answer() == True:
-            return True
-        elif level3_question1_answer() == False:
-            return False
-    if question == 2:
-        level3_question2()
-        if level3_question2_answer() == True:
-            return True
-        elif level3_question2_answer() == False:
-            return False
-    if question == 3:
-        level3_question3()
-        if level3_question3_answer() == True:
-            return True
-        elif level3_question3_answer() == False:
-            return False
-    if question == 4:
-        level3_question4()
-        if level3_question4_answer() == True:
-            return True
-        elif level3_question4_answer() == False:
-            return False
-    if question == 5:
-        level3_question5()
-        if level3_question5_answer() == True:
-            return True
-        elif level3_question5_answer() == False:
-            return False    
-    if question == 6:
-        level3_question6()
-        if level3_question6_answer() == True:
-            return True
-        elif level3_question6_answer() == False:
-            return False
-    if question == 7:
-        level3_question7()
-        if level3_question7_answer() == True:
-            return True
-        elif level3_question7_answer() == False:
-            return False
-    if question == 8:
-        level3_question8()
-        if level3_question8_answer() == True:
-            return True
-        elif level3_question8_answer() == False:
-            return False
+def level3_questions_method(run = True):          #same as other ones
+    if run:
+        if question == 1:
+            level3_question1()
+            if level3_question1_answer() == True:
+                return True
+            elif level3_question1_answer() == False:
+                return False
+        if question == 2:
+            level3_question2()
+            if level3_question2_answer() == True:
+                return True
+            elif level3_question2_answer() == False:
+                return False
+        if question == 3:
+            level3_question3()
+            if level3_question3_answer() == True:
+                return True
+            elif level3_question3_answer() == False:
+                return False
+        if question == 4:
+            level3_question4()
+            if level3_question4_answer() == True:
+                return True
+            elif level3_question4_answer() == False:
+                return False
+        if question == 5:
+            level3_question5()
+            if level3_question5_answer() == True:
+                return True
+            elif level3_question5_answer() == False:
+                return False    
+        if question == 6:
+            level3_question6()
+            if level3_question6_answer() == True:
+                return True
+            elif level3_question6_answer() == False:
+                return False
+        if question == 7:
+            level3_question7()
+            if level3_question7_answer() == True:
+                return True
+            elif level3_question7_answer() == False:
+                return False
+        if question == 8:
+            level3_question8()
+            if level3_question8_answer() == True:
+                return True
+            elif level3_question8_answer() == False:
+                return False
 
 def level3(): #same as other ones
     level_font = pygame.font.Font('Style/minecraft_font.ttf',48)
@@ -1437,7 +1445,7 @@ def level3(): #same as other ones
     if page_no == 11:
         window.blit(level,levelRect)
     if page_no == 12:
-        level3_questions_method()
+        level3_questions_method(run = True)
 
 def sprite(): #posiitioning for hearts, sprite and score
     font = pygame.font.Font('Style/minecraft_font.ttf',24)  #font, size
@@ -1447,12 +1455,16 @@ def sprite(): #posiitioning for hearts, sprite and score
         textRect = text.get_rect()
         textRect.center = (810,40)
         window.blit (text,textRect)
-    if sprite_no == 1:  #sprite for first question
-        window.blit(normal,postion_sprite)
-    if sprite_no == 2:  #if correct then sprite is happy
+    if page_no !=13:
+        if sprite_no == 1:  #sprite for first question
+            window.blit(normal,postion_sprite)
+        if sprite_no == 2:  #if correct then sprite is happy
+            window.blit(happy,postion_sprite)
+        if sprite_no == 3:  #if wrong sprite is dying
+            window.blit(dying,postion_sprite)   
+    else:
         window.blit(happy,postion_sprite)
-    if sprite_no == 3:  #if wrong sprite is dying
-        window.blit(dying,postion_sprite)    
+
     if life == 3:   #displaying amount of hearts depending on life left
         if page_no != 13:
             window.blit(heart1,postion_heart1)
@@ -1468,18 +1480,26 @@ def sprite(): #posiitioning for hearts, sprite and score
     if life == 0:   #if died then pet dies
         window.blit(dead,postion_sprite)
 
-def time_taken():
-    if page_no == 13 and page_no == 99:
-        end_time = time.time()
-        total_time = start_time - end_time
-        total_time_mins = total_time/60 
+def save_variable_values():
+    """Save the values of variables to a file."""
+    with open("variables.pkl", "wb") as f:
+        pickle.dump([page_no, question, life, score, numer_list, all_questions, a, change, sprite_no], f)
+
+def read_variable_values():
+    """Read the values of variables from a file."""
+    global variables
+    with open("variables.pkl", "rb") as f:
+        variables = pickle.load(f)
+
+
+
+
 
 page_no = 0     #page number
 question = 1    #starting question --> ends up being randomised for late questions
 
 life = 3        #amount of lives
 score = 0       #questions to complete --> 1/5 means first question to complete
-running = True  #loop variable
 
 numer_list = []     #randomised question list
 all_questions = 0   #amount of numbers is numer_list
@@ -1487,15 +1507,25 @@ a = 0               #position in numer_list
 change = 1          #variable for running randomised list once
 
 sprite_no = 1       #costume for sprite, changes depending on right or wrong answer
-start_time = time.time()
 
+if os.path.exists("variables.pkl"): #if a file has been created use it if not use starting numbers
+    read_variable_values()
+    page_no = variables[0]
+    question = variables[1]
+    life = variables[2]
+    score = variables[3]
+    numer_list = variables[4]
+    all_questions = variables[5]
+    a = variables[6]
+    change = variables[7]
+    sprite_no = variables[8]
+
+
+running = True  #loop variable
 while running:
     mouse = pygame.mouse.get_pos()      #stores mouse position
     window.blit(bg_img,(0,0))           #background image
-    infopages()                             #change the page after first click
-    level1()
-    level2()
-    level3()  
+
     if change == 1:     #generates a random list once until player dies or plays again
         numer_list.clear()
         all_questions = 0
@@ -1571,7 +1601,7 @@ while running:
                     question = numer_list[a]
                     a = a + 1
                     score = score + 1
-                    sprite = 2
+                    sprite_no = 2
             else:
                 score = 0
                 question = 1
@@ -1614,9 +1644,14 @@ while running:
 
         if event.type == MOUSEBUTTONUP: #if mouse clicked
             print(page_no, question, life, score,change)
-
         end()            
     
+    infopages()                             #change the page after first click
+    level1()
+    level2()
+    level3()  
+
     pygame.display.update()
-             
+save_variable_values()  #save data before closing      
 pygame.quit()
+sys.exit()
