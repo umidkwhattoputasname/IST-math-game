@@ -26,10 +26,7 @@ font = pygame.font.Font('Style/minecraft_font.ttf',60)  #font, size
 text = font.render('Tamathgotchi Game', True, test)  #text, smth, text colour, box colour
 textRect = text.get_rect()
 textRect.center = (X//2,Y//4)
-startfont = pygame.font.Font('Style/minecraft_font.ttf',24)  #font, size
-start = startfont.render('Click to start', True, test)  #text, smth, text colour, box colour
-startRect = start.get_rect()
-startRect.center = (X//2,Y//2)
+
 
 #Sprites
 width_sprite,height_sprite = 175,250
@@ -73,14 +70,22 @@ def end(): #end program if window closed
         running = False
 
 def infopages(): #formatting for first few pages and instructions
+    startfont = pygame.font.Font('Style/minecraft_font.ttf',16)  #font, size
+    start = startfont.render('New Game', True, test)  #text, smth, text colour, box colour
+    continuing = startfont.render('Continue Game', True, test)  #text, smth, text colour, box colour
     infofont = pygame.font.Font('Style/minecraft_font.ttf',32)
     instructions = "You have 3 lives"
     info = infofont.render(instructions, True, test)
     infoRect = info.get_rect()
     infoRect.center = (X//2,Y//2)
-    if page_no == 0:
+    if page_no == -1:
+        pygame.draw.rect(window, test, pygame.Rect(400,262,200,40), 3,3) #screen, colour, position[x,y,width,height], fill/border, corners
+        window.blit(start,(458,270))
         window.blit(text, textRect)         #Text/title
-        window.blit(start,startRect)
+        if os.path.exists("variables.pkl"):
+            pygame.draw.rect(window, test, pygame.Rect(400,330,200,40), 3,3) #screen, colour, position[x,y,width,height], fill/border, corners
+            window.blit(continuing,(432,338))
+            window.blit(text, textRect)         #Text/title
 
     if page_no == 1 :
         window.blit(normal,postion_sprite)
@@ -1450,10 +1455,15 @@ def level3(): #same as other ones
 def sprite(): #posiitioning for hearts, sprite and score
     font = pygame.font.Font('Style/minecraft_font.ttf',24)  #font, size
     if page_no != 13 and page_no != 99: #don't display score on death and completion screens
-        text = f"{score +1}/5"
+        if page_no == 6:   
+            text = f"Level 1 :  {score +1}/5"
+        if page_no == 9:
+            text = f"Level 2 :  {score +1}/5"
+        if page_no == 12:
+            text = f"Level 3 :  {score +1}/5"
         text = font.render(text, True, test)  #text, smth, text colour, box colour
         textRect = text.get_rect()
-        textRect.center = (810,40)
+        textRect.center = (730,40)
         window.blit (text,textRect)
     if page_no !=13:
         if sprite_no == 1:  #sprite for first question
@@ -1495,7 +1505,7 @@ def read_variable_values():
 
 
 
-page_no = 0     #page number
+page_no = -1     #page number
 question = 1    #starting question --> ends up being randomised for late questions
 
 life = 3        #amount of lives
@@ -1508,17 +1518,8 @@ change = 1          #variable for running randomised list once
 
 sprite_no = 1       #costume for sprite, changes depending on right or wrong answer
 
-if os.path.exists("variables.pkl"): #if a file has been created use it if not use starting numbers
-    read_variable_values()
-    page_no = variables[0]
-    question = variables[1]
-    life = variables[2]
-    score = variables[3]
-    numer_list = variables[4]
-    all_questions = variables[5]
-    a = variables[6]
-    change = variables[7]
-    sprite_no = variables[8]
+#if os.path.exists("variables.pkl"): #if a file has been created use it if not use starting numbers
+
 
 
 running = True  #loop variable
@@ -1536,7 +1537,24 @@ while running:
                 all_questions = all_questions + 1
         change = 0 #stops generating list
     for event in pygame.event.get():  
-        if page_no <= 5:                #stops page turning after instructions
+        if page_no == -1:
+            if event.type == MOUSEBUTTONUP:
+                if 400 <= mouse[0] <= 600 and 262 <= mouse[1] <= 302:
+                    page_no = page_no + 1
+                if os.path.exists("variables.pkl"):
+                    if 400 <= mouse[0] <= 600 and 330 <= mouse[1] <= 370:
+                        read_variable_values()
+                        page_no = variables[0] #400,330,200,40
+                        question = variables[1]
+                        life = variables[2]
+                        score = variables[3]
+                        numer_list = variables[4]
+                        all_questions = variables[5]
+                        a = variables[6]
+                        change = variables[7]
+                        sprite_no = variables[8]
+
+        if 0 <= page_no <= 5:                #stops page turning after instructions
             if event.type == MOUSEBUTTONUP: #if mouse clicked
                 page_no = page_no + 1
         
@@ -1617,7 +1635,7 @@ while running:
                 change = 1  #generates another question list
                 sprite_no = 1
             elif complete() == False:   #same thing but page goes to title page
-                page_no = -1
+                page_no = -2
                 question = 1
                 score = 0
                 life = 3
@@ -1634,7 +1652,7 @@ while running:
                 a = 0
                 sprite_no = 1
             elif fail() == False: #reset variable and go to home page
-                page_no = -1
+                page_no = -2
                 question = 1
                 score = 0
                 life = 3
