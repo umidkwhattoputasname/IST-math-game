@@ -1,7 +1,7 @@
 import os
 import sys
 import pygame
-from pygame import MOUSEBUTTONDOWN,MOUSEBUTTONUP,QUIT
+from pygame.locals import MOUSEBUTTONDOWN,MOUSEBUTTONUP,QUIT
 import random
 import pickle
 pygame.init()
