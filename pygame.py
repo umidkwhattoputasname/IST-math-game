@@ -79,12 +79,12 @@ def infopages(): #formatting for first few pages and instructions
     infoRect = info.get_rect()
     infoRect.center = (X//2,Y//2)
     if page_no == -1:
-        pygame.draw.rect(window, test, pygame.Rect(400,262,200,40), 3,3) #screen, colour, position[x,y,width,height], fill/border, corners
-        window.blit(start,(458,270))
+        pygame.draw.rect(window, test, pygame.Rect(400,212,200,40), 3,3) #screen, colour, position[x,y,width,height], fill/border, corners
+        window.blit(start,(458,220))
         window.blit(text, textRect)         #Text/title
         if os.path.exists("variables.pkl"):
-            pygame.draw.rect(window, test, pygame.Rect(400,330,200,40), 3,3) #screen, colour, position[x,y,width,height], fill/border, corners
-            window.blit(continuing,(432,338))
+            pygame.draw.rect(window, test, pygame.Rect(400,300,200,40), 3,3) #screen, colour, position[x,y,width,height], fill/border, corners
+            window.blit(continuing,(432,308))
             window.blit(text, textRect)         #Text/title
 
     if page_no == 1 :
@@ -1539,10 +1539,10 @@ while running:
     for event in pygame.event.get():  
         if page_no == -1:
             if event.type == MOUSEBUTTONUP:
-                if 400 <= mouse[0] <= 600 and 262 <= mouse[1] <= 302:
+                if 400 <= mouse[0] <= 600 and 212 <= mouse[1] <= 252:
                     page_no = page_no + 1
                 if os.path.exists("variables.pkl"):
-                    if 400 <= mouse[0] <= 600 and 330 <= mouse[1] <= 370:
+                    if 400 <= mouse[0] <= 600 and 300 <= mouse[1] <= 340:
                         read_variable_values()
                         page_no = variables[0] #400,330,200,40
                         question = variables[1]
@@ -1635,13 +1635,14 @@ while running:
                 change = 1  #generates another question list
                 sprite_no = 1
             elif complete() == False:   #same thing but page goes to title page
-                page_no = -2
+                page_no = -1
                 question = 1
                 score = 0
                 life = 3
                 change = 1
                 sprite_no = 1
-       
+            if os.path.exists("variables.pkl"):
+                os.remove("variables.pkl")
         if life == 0:       #player failed
             if fail() == True:  #reset all variables and go straight to lvl 1
                 page_no = 4
@@ -1652,14 +1653,15 @@ while running:
                 a = 0
                 sprite_no = 1
             elif fail() == False: #reset variable and go to home page
-                page_no = -2
+                page_no = -1
                 question = 1
                 score = 0
                 life = 3
                 change = 1
                 a = 0
                 sprite_no = 1
-
+            if os.path.exists("variables.pkl"):
+                os.remove("variables.pkl")
         if event.type == MOUSEBUTTONUP: #if mouse clicked
             print(page_no, question, life, score,change)
         end()            
